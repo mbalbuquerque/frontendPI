@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliação de Horas - UP Digital</title>
     <link rel="stylesheet" href="../css/avaliacaodehoras.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -28,83 +28,78 @@
         </aside>
 
         <main class="main-content">
-            <h1>AVALIAÇÃO DE HORAS</h1>
+            <h1>VALIDAÇÃO DE ATIVIDADES COMPLEMENTARES</h1>
 
-            <section class="form-container-azul card-avaliacao">
-                <div class="filtros-avaliacao">
-                    <div class="input-group full-width">
-                        <select class="custom-select" id="filtroTipo">
-                            <option value="">CURSO / TURMA / ALUNO</option>
-                            <option value="curso">Curso</option>
-                            <option value="turma">Turma</option>
-                            <option value="aluno">Aluno</option>
-                        </select>
-                    </div>
-                    <div class="input-search full-width">
-                        <input type="text" id="searchInput" placeholder="DIGITE O NOME DA OPÇÃO ESCOLHIDA">
-                        <i class="fas fa-search" id="searchIcon"></i>
-                    </div>
+            <section class="container-avaliacao glass">
+                <div class="status-summary">
+                    <span class="badge">Pendentes: <strong id="countPendentes">1</strong></span>
                 </div>
 
-                <div class="colunas-documentos">
-                    <div class="col-doc">
-                        <h3>ARQUIVOS RECEBIDOS</h3>
-                        <div class="lista-arquivos">
-                            <div class="item-arquivo">
-                                <span>CERTIFICADO_ADS_01</span>
-                                <a href="#" class="btn-abrir">ABRIR</a>
-                                <div class="status-controls">
-                                    <i class="fas fa-check-circle check" title="Aprovar"></i>
-                                    <i class="fas fa-exclamation-circle warn" title="Pendência"></i>
-                                    <i class="fas fa-times-circle error" title="Recusar"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-doc">
-                        <h3>ARQUIVOS COM PENDÊNCIAS</h3>
-                        <div class="lista-arquivos">
-                            <div class="item-arquivo">
-                                <span>CERTIFICADO_MBA_02</span>
-                                <a href="#" class="btn-abrir">ABRIR</a>
-                                <div class="status-controls">
-                                    <i class="fas fa-check-circle check"></i>
-                                    <i class="fas fa-times-circle error"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-doc">
-                        <h3>ARQUIVOS APROVADOS</h3>
-                        <div class="lista-arquivos">
-                            <div class="item-arquivo">
-                                <span>DOC_VALIDADO_03</span>
-                                <a href="#" class="btn-abrir">ABRIR</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-doc">
-                        <h3>ARQUIVOS REPROVADOS</h3>
-                        <div class="lista-arquivos">
-                            <div class="item-arquivo">
-                                <span>DOC_INVALIDO_04</span>
-                                <a href="#" class="btn-abrir">ABRIR</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <table class="tabela-validacao">
+                    <thead>
+                        <tr>
+                            <th>DATA</th>
+                            <th>ALUNO</th>
+                            <th>CURSO</th>
+                            <th>ARQUIVO</th>
+                            <th>AÇÕES</th>
+                        </tr>
+                    </thead>
+                    <tbody id="corpoTabelaValidacao">
+                        <tr>
+                            <td>29/04/2026</td>
+                            <td>Gabriel França</td>
+                            <td>ADS</td>
+                            <td><i class="fas fa-file-pdf"></i> certificado_projeto.pdf</td>
+                            <td>
+                                <button class="btn-analisar" onclick="iniciarAnalise('Gabriel França', 'certificado_projeto.pdf')">
+                                    ANALISAR
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
 
-            <div class="action-buttons-footer">
-                <button class="btn-footer blue" id="btnGerarPDF">GERAR PDF</button>
+            <div class="container-acoes-final">
+                <button id="btnGerarPDF" class="btn-pdf-minimalista" onclick="gerarRelatorioPDF()">
+                    <i class="fas fa-file-pdf"></i> GERAR RELATÓRIO PDF
+                </button>
             </div>
 
             <div class="circle-orange"></div>
             <div class="circle-blue"></div>
         </main>
+    </div>
+
+    <div id="modalAnalise" class="modal-overlay">
+        <div class="modal-content glass">
+            <div class="modal-header">
+                <h3>Avaliar Documento</h3>
+                <span class="close-btn" onclick="fecharModal()">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="info-aluno">
+                    <p><strong>Candidato:</strong> <span id="nomeAlunoModal"></span></p>
+                    <p><strong>Documento:</strong> <span id="nomeArquivoModal"></span></p>
+                </div>
+                
+                <div class="preview-placeholder">
+                    <i class="fas fa-search-plus"></i>
+                    <p>O arquivo abrirá em uma nova aba para conferência.</p>
+                    <button class="btn-visualizar" onclick="window.open('#', '_blank')">VISUALIZAR PDF</button>
+                </div>
+
+                <div class="form-group">
+                    <label>Parecer do Coordenador:</label>
+                    <textarea id="justificativa" placeholder="Obrigatório em caso de reprovação..."></textarea>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-reprovar" onclick="finalizarAvaliacao('reprovado')">REPROVAR</button>
+                <button class="btn-aprovar" onclick="finalizarAvaliacao('aprovado')">APROVAR E VALIDAR</button>
+            </div>
+        </div>
     </div>
 
     <script src="../js/script.js"></script>

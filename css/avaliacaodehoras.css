@@ -150,62 +150,309 @@ input, .custom-select, .display-box {
 /* ============================================================
    5. TELA DE AVALIAÇÃO DE HORAS (COLUNAS)
    ============================================================ */
-.colunas-documentos {
+.container-avaliacao {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+}
+
+.tabela-validacao {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.tabela-validacao th {
+    padding: 15px;
+    border-bottom: 2px solid #4facfe;
+    color: #4facfe;
+    text-align: left;
+    font-size: 12px;
+}
+
+.tabela-validacao td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.btn-analisar {
+    background: #4facfe;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Modal Estilizado */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.btn-aprovar { background: #28a745; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; flex: 1; font-weight: bold; }
+.btn-reprovar { background: #dc3545; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; flex: 1; font-weight: bold; }
+.modal-footer { display: flex; gap: 10px; margin-top: 20px; }============================================================
+   6. MARCAÇÕES E CHECKBOXES (ALINHADOS)
+   ============================================================ */
+.checkbox-group {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    height: 450px;
-    margin-top: 10px;
+    gap: 15px;
 }
 
-.col-doc {
-    background-color: rgba(255, 255, 255, 0.6); /* Fundo claro para colunas */
-    border-radius: 10px;
-    padding: 15px 10px;
+.checkbox-group-aluno {
     display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(0,0,0,0.05);
+    justify-content: center;
+    gap: 60px;
+    align-items: center;
 }
 
-.col-doc {
-    background-color: rgba(255, 255, 255, 0.4); /* Fundo um pouco mais suave */
-    border-radius: 15px; /* Bordas mais arredondadas como no desenho */
-    padding: 20px 15px; /* Mais espaço interno */
-    display: flex;
-    flex-direction: column;
-    border: 1px solid rgba(0,0,0,0.03); /* Borda quase invisível */
-    height: 100%; /* Garante que ocupem a altura total */
-}
-
-.lista-arquivos { overflow-y: auto; flex-grow: 1; }
-
-.item-arquivo {
+.check-item {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    font-size: 12px; /* Aumentar um pouco a fonte */
-    padding: 15px; /* Aumentar significativamente o padding para dar o visual do desenho */
-    background: #fff;
-    margin-bottom: 12px; /* Mais espaço entre um card e outro */
-    border-radius: 10px; /* Bordas mais arredondadas no card */
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05); /* Sombra mais suave e definida */
-    transition: transform 0.2s; /* Efeito visual ao passar o mouse */
+    gap: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    min-height: 40px;
 }
 
-.item-arquivo:hover {
-    transform: translateY(-2px); /* Levanta levemente o card */
+.check-item input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: #0033a0;
 }
 
-.btn-abrir { text-decoration: none; color: #0033a0; font-weight: bold; font-size: 10px; }
+/* /* ============================================================
+   1. RESET E CONFIGURAÇÕES GLOBAIS
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
 
-/* Controles de Homologação */
-.status-controls { display: flex; gap: 6px; }
-.status-controls i { cursor: pointer; font-size: 14px; }
-.check { color: #28a745; }
-.warn { color: #ffc107; }
-.error { color: #dc3545; }
+body {
+    background-color: #f5f5f5;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; 
+    
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+   
+}
 
 /* ============================================================
+   2. SIDEBAR (MENU LATERAL)
+   ============================================================ */
+.sidebar {
+    background-color: #e69161;
+    width: 70px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.sidebar.open { width: 240px; }
+
+.menu-icon {
+    font-size: 24px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    width: min-content;
+}
+
+.sidebar ul { list-style: none; }
+
+.sidebar li {
+    padding: 15px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    margin-bottom: 5px;
+}
+
+.sidebar li i { font-size: 20px; min-width: 25px; text-align: center; }
+
+.sidebar li span {
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: none; 
+}
+
+.sidebar.open li span { 
+    opacity: 1; 
+    display: inline; }
+.sidebar li:hover { 
+    background-color: rgba(255, 255, 255, 0.3); 
+}
+.sidebar li.active {
+    background: rgba(255, 255, 255, 0.5); 
+}
+.sidebar li.logout { 
+    margin-top: auto; 
+    margin-bottom: 20px; 
+}
+
+/* ============================================================
+   3. CONTEÚDO PRINCIPAL (MAIN) E CARDS
+   ============================================================ */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow-y: auto;
+       
+}
+
+h1 {
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    font-weight: 400;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* Cards Azuis com Destaque e Separação */
+.profile-card, .form-container-azul, .permissions-container {
+    background-color: #c4d4e8;
+    width: 100%;
+    max-width: 900px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1); /* Sombra para profundidade */
+    margin-bottom: 25px; /* Espaçamento entre cards */
+}
+
+/* ============================================================
+   4. FORMULÁRIOS E INPUTS
+   ============================================================ */
+input, .custom-select, .display-box {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    outline: none;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+.input-search { position: relative;
+    width: 100%;
+    margin-bottom: 15px; 
+}
+.input-search i { 
+    position: absolute; 
+    right: 15px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    font-size: 1.1rem; 
+    color: #444;
+    cursor: pointer;
+}
+
+/* ============================================================
+   5. TELA DE AVALIAÇÃO DE HORAS (COLUNAS)
+   ============================================================ */
+.container-avaliacao {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+}
+
+.tabela-validacao {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+
+.tabela-validacao th {
+    padding: 15px;
+    border-bottom: 2px solid #4facfe;
+    color: #4facfe;
+    text-align: left;
+    font-size: 12px;
+}
+
+.tabela-validacao td {
+    padding: 15px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+.btn-analisar {
+    background: #4facfe;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Modal Estilizado */
+.modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(4px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    width: 90%;
+    max-width: 500px;
+    background: white;
+    border-radius: 15px;
+    padding: 25px;
+}
+
+.btn-aprovar { background: #28a745; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; flex: 1; font-weight: bold; }
+.btn-reprovar { background: #dc3545; color: white; border: none; padding: 12px 20px; border-radius: 6px; cursor: pointer; flex: 1; font-weight: bold; }
+.modal-footer { display: flex; gap: 10px; margin-top: 20px; }============================================================
    6. MARCAÇÕES E CHECKBOXES (ALINHADOS)
    ============================================================ */
 .checkbox-group {
@@ -240,26 +487,50 @@ input, .custom-select, .display-box {
 /* ============================================================
    7. BOTÕES E CÍRCULOS
    ============================================================ */
-.action-buttons-footer {
-    margin-top: 20px;
+/* Container para garantir que ele fique abaixo da lista */
+.container-acoes-final {
     display: flex;
     justify-content: center;
-    gap: 50px;
+    width: 100%;
+    margin-top: 20px; /* Distância da tabela */
+    padding-bottom: 40px; /* Margem de segurança no fim da página */
 }
 
-.btn-footer {
-    width: 180px;
-    padding: 12px 0;
-    border-radius: 8px;
+/* Estilo do botão seguindo o padrão do seu projeto */
+.btn-pdf-minimalista {
+    background-color: #4facfe; /* Azul do seu sistema */
+    color: white;
     border: none;
+    padding: 10px 25px;
+    border-radius: 6px; /* Borda levemente arredondada como seus inputs */
+    font-size: 13px;
     font-weight: bold;
     cursor: pointer;
-    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.btn-footer.blue { background-color: #6a92cc; color: white; }
-.btn-footer.gray { background-color: #9db2c9; color: #000; }
+.btn-pdf-minimalista:hover {
+    background-color: #0081f9;
+    transform: scale(1.02); /* Leve destaque ao passar o mouse */
+}
 
+.btn-pdf-minimalista i {
+    font-size: 15px;
+}
+
+.btn-pdf-standard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(255, 65, 108, 0.4);
+    filter: brightness(1.1);
+}
+
+.btn-pdf-premium i {
+    font-size: 18px;
+}
 .circle-orange {
     position: fixed;
     bottom: -110px;
@@ -283,6 +554,36 @@ input, .custom-select, .display-box {
 }
 
 /* ============================================================
+   8. RESPONSIVIDADE
+   ============================================================ */
+@media (max-width: 900px) {
+    .colunas-documentos { grid-template-columns: repeat(2, 1fr); height: auto; }
+}
+
+@media (max-width: 768px) {
+    .sidebar { width: 100% !important; height: 60px; position: fixed; bottom: 0; flex-direction: row; }
+    .sidebar li span, .menu-icon { display: none !important; }
+    .main-content { padding-bottom: 80px; }
+    .colunas-documentos { grid-template-columns: 1fr; }
+    .action-buttons-footer { flex-direction: column; align-items: center; gap: 10px; }
+
+    @media print {
+    .sidebar, .circle-orange, .circle-blue, .menu-icon, .action-buttons-footer {
+        display: none !important;
+    }
+    .main-content {
+        padding: 0;
+        width: 100%;
+    }
+    .form-container-azul {
+        box-shadow: none;
+        background-color: #fff !important;
+    }
+}
+};
+
+
+============================================================
    8. RESPONSIVIDADE
    ============================================================ */
 @media (max-width: 900px) {

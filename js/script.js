@@ -315,3 +315,53 @@ function atualizarDashboard(dados) {
 
 // Simulação de chamada após selecionar um aluno
 // atualizarDashboard({ total: 180, percentual: 90 });
+
+function iniciarAnalise(aluno, arquivo) {
+    const modal = document.getElementById('modalAnalise');
+    
+    if (modal) {
+        document.getElementById('nomeAlunoModal').innerText = aluno;
+        document.getElementById('nomeArquivoModal').innerText = arquivo;
+        modal.style.display = 'flex';
+    }
+}
+
+function fecharModal() {
+    const modal = document.getElementById('modalAnalise');
+    if (modal) modal.style.display = 'none';
+}
+
+function finalizarAvaliacao(resultado) {
+    const aluno = document.getElementById('nomeAlunoModal').innerText;
+    const justificativa = document.getElementById('justificativa').value;
+
+    if (resultado === 'reprovado' && justificativa.trim() === "") {
+        alert("Por favor, informe o motivo da reprovação.");
+        return;
+    }
+
+    alert(`O arquivo de ${aluno} foi ${resultado.toUpperCase()} com sucesso.`);
+    fecharModal();
+    // Aqui você adicionaria a lógica para remover a linha da tabela ou atualizar o banco
+};
+
+function gerarRelatorioPDF() {
+    // Seleciona o conteúdo que você quer converter (ex: a tabela de validação)
+    const elemento = document.querySelector('.container-avaliacao'); 
+    
+    if (!elemento) {
+        alert("Erro: Conteúdo da tabela não encontrado.");
+        return;
+    }
+
+    const opcoes = {
+        margin:       10,
+        filename:     'Relatorio_Validacao_Horas.pdf',
+        image:        { type: 'jpeg', quality: 0.98 },
+        html2canvas:  { scale: 2 },
+        jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' } // Horizontal para tabelas
+    };
+
+    // Inicia o processo de geração
+    html2pdf().set(opcoes).from(elemento).save();
+};
