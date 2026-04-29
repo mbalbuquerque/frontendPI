@@ -1,0 +1,289 @@
+/* ============================================================
+   1. RESET E CONFIGURAÇÕES GLOBAIS
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Scroll apenas nos containers internos */
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ============================================================
+   2. SIDEBAR (MENU LATERAL)
+   ============================================================ */
+.sidebar {
+    background-color: #e69161;
+    width: 70px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.sidebar.open { width: 240px; }
+
+.menu-icon {
+    font-size: 24px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    width: min-content;
+}
+
+.sidebar ul { list-style: none; }
+
+.sidebar li {
+    padding: 15px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    margin-bottom: 5px;
+}
+
+.sidebar li i { font-size: 20px; min-width: 25px; text-align: center; }
+
+.sidebar li span {
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: none; 
+}
+
+.sidebar.open li span { opacity: 1; display: inline; }
+.sidebar li:hover { background-color: rgba(255, 255, 255, 0.3); }
+.sidebar li.active { background: rgba(255, 255, 255, 0.5); }
+.sidebar li.logout { margin-top: auto; margin-bottom: 20px; }
+
+/* ============================================================
+   3. CONTEÚDO PRINCIPAL (MAIN) E CARDS
+   ============================================================ */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow-y: auto;
+}
+
+h1 {
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    font-weight: 400;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* Cards Azuis com Destaque e Separação */
+.profile-card, .form-container-azul, .permissions-container {
+    background-color: #c4d4e8;
+    width: 100%;
+    max-width: 900px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1); /* Destaque por sombra */
+    margin-bottom: 30px; /* Separação entre cards */
+}
+
+/* ============================================================
+   4. FORMULÁRIOS, INPUTS E SELEÇÕES
+   ============================================================ */
+label {
+    display: block;
+    font-size: 11px;
+    margin-bottom: 6px;
+    font-weight: 800;
+    color: #333;
+}
+
+input, .custom-select, .display-box {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    outline: none;
+    font-size: 14px;
+}
+
+.input-search { position: relative; width: 100%; }
+.input-search i { 
+    position: absolute; 
+    right: 15px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    font-size: 1.1rem; 
+    color: #444;
+    cursor: pointer;
+}
+
+/* ============================================================
+   5. TELA DE AVALIAÇÃO DE HORAS (SISTEMA DE COLUNAS)
+   ============================================================ */
+.colunas-documentos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    height: 420px;
+    margin-top: 15px;
+}
+
+.col-doc {
+    background-color: rgba(255, 255, 255, 0.5); /* Efeito translúcido interno */
+    border-radius: 10px;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.col-doc h3 {
+    font-size: 9px;
+    text-align: center;
+    margin-bottom: 12px;
+    color: #333;
+    font-weight: bold;
+    min-height: 22px;
+}
+
+.lista-arquivos { overflow-y: auto; flex-grow: 1; }
+
+.item-arquivo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10px;
+    padding: 8px;
+    background: #fff;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.03);
+}
+
+.btn-abrir { text-decoration: none; color: #0033a0; font-weight: bold; font-size: 9px; }
+
+/* Controles de Status (Ícones de Homologação) */
+.status-controls { display: flex; gap: 5px; }
+.status-controls i { cursor: pointer; font-size: 13px; transition: 0.2s; }
+.status-controls i:hover { transform: scale(1.2); }
+
+.check { color: #28a745; }
+.warn { color: #ffc107; }
+.error { color: #dc3545; }
+
+/* ============================================================
+   6. TELA DE REGRAS (LAYOUT EM GRADE)
+   ============================================================ */
+.regras-container-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    width: 100%;
+    max-width: 900px;
+}
+
+.card-regras {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ============================================================
+   7. CHECKBOXES E BOTÕES
+   ============================================================ */
+.checkbox-group-aluno {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    align-items: center;
+}
+
+.check-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.action-buttons-footer {
+    margin-top: 25px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    width: 100%;
+}
+
+.btn-footer {
+    width: 180px;
+    padding: 12px 0;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: 0.3s;
+}
+
+.btn-footer.blue { background-color: #6a92cc; color: white; }
+.btn-footer.gray { background-color: #9db2c9; color: #000; }
+.btn-footer:hover { filter: brightness(0.9); transform: translateY(-2px); }
+
+/* ============================================================
+   8. ELEMENTOS DECORATIVOS E RESPONSIVIDADE
+   ============================================================ */
+.circle-orange {
+    position: fixed;
+    bottom: -110px;
+    right: -90px;
+    width: 330px;
+    height: 330px;
+    background-color: #e69161;
+    border-radius: 50%;
+    z-index: -2;
+}
+
+.circle-blue {
+    position: fixed;
+    bottom: 30px;
+    right: 50px;
+    width: 170px;
+    height: 170px;
+    background-color: #0033a0;
+    border-radius: 50%;
+    z-index: -1;
+}
+
+@media (max-width: 900px) {
+    .colunas-documentos, .regras-container-grid { grid-template-columns: 1fr; height: auto; }
+}
+
+@media (max-width: 768px) {
+    .sidebar { width: 100% !important; height: 60px; position: fixed; bottom: 0; flex-direction: row; }
+    .sidebar li span, .menu-icon { display: none !important; }
+    .main-content { padding-bottom: 80px; }
+    .checkbox-group-aluno { flex-direction: column; gap: 15px; }
+}

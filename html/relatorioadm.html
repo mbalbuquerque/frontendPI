@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relatórios - UP Digital</title>
+    <link rel="stylesheet" href="../css/relatorioaluno.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div class="menu-icon" id="menuBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+            <nav>
+                <ul>
+                    <li id="btnInicio"><i class="fas fa-home"></i> <span>INÍCIO</span></li>
+                    <li id="btnConta"><i class="fas fa-user"></i> <span>CONTA</span></li>
+                    <li id="btnArquivos"><i class="fas fa-folder"></i> <span>ARQUIVOS</span></li>
+                    <li id="btnRegras"><i class="fas fa-file-contract"></i> <span>REGRAS</span></li>
+                    <li id="btnDashboard" class="active"><i class="fas fa-chart-bar"></i> <span>DASHBOARD</span></li>
+                    <li class="logout" id="btnLogout">
+                        <i class="fas fa-times-circle"></i> <span>SAIR</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <header class="header-section">
+                <h1>RELATÓRIOS</h1>
+            </header>
+
+            <section class="form-container-azul">
+               
+                <section class="dashboard-container">
+   <div class="relatorios-header-premium">
+    <div class="filter-row">
+        <div class="filter-item">
+            <label><i class="fas fa-graduation-cap"></i> CURSO</label>
+            <select id="selectCurso">
+                <option value="">Todos os Cursos</option>
+                <option value="ads">Análise e Des. de Sistemas</option>
+                <option value="mba">MBA em Gestão Agil</option>
+            </select>
+        </div>
+
+        <div class="filter-item">
+            <label><i class="fas fa-users"></i> TURMA</label>
+            <select id="selectTurma">
+                <option value="">Selecione o Curso primeiro</option>
+            </select>
+        </div>
+
+        <div class="filter-item search-flex">
+            <label><i class="fas fa-user"></i> ALUNO</label>
+            <div class="search-wrapper">
+                <input type="text" placeholder="Nome ou CPF..." id="buscaAluno">
+                <button class="btn-search-icon"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <div class="dash-grid">
+        <div class="dash-card">
+            <i class="fas fa-clock icon-blue"></i>
+            <div class="dash-info">
+                <span class="dash-label">TOTAL DE HORAS ACUMULADAS</span>
+                <h2 id="totalHoras">145h</h2>
+            </div>
+        </div>
+
+        <div class="dash-card">
+            <i class="fas fa-chart-line icon-green"></i>
+            <div class="dash-info">
+                <span class="dash-label">PERCENTUAL DE CONCLUSÃO</span>
+                <h2 id="percentualConclusao">72%</h2>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-fill" style="width: 72%;"></div>
+            </div>
+        </div>
+
+        <div class="dash-card">
+            <i class="fas fa-tags icon-orange"></i>
+            <div class="dash-info">
+                <span class="dash-label">HORAS POR CATEGORIA</span>
+                <ul class="categoria-lista">
+                    <li><span>Pesquisa:</span> <strong>40h</strong></li>
+                    <li><span>Extensão:</span> <strong>60h</strong></li>
+                    <li><span>Eventos:</span> <strong>45h</strong></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+        <div class="deco-circle-orange-bottom"></div>
+        <div class="deco-circle-blue-bottom"></div>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

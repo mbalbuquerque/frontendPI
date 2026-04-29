@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Horas - UP Digital</title>
+    <link rel="stylesheet" href="../css/avaliacaodehoras.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div class="menu-icon" id="menuBtn"><i class="fas fa-bars"></i></div>
+            <nav>
+                <ul>
+                    <li id="btnInicio"><i class="fas fa-home"></i> <span>INÍCIO</span></li>
+                    <li id="btnConta"><i class="fas fa-user"></i> <span>CONTA</span></li>
+                    <li id="btnArquivos"><i class="fas fa-folder"></i> <span>ARQUIVOS</span></li>
+                    <li id="btnRegras"><i class="fas fa-file-contract"></i> <span>REGRAS</span></li>
+                    <li id="btnDashboard"><i class="fas fa-chart-bar"></i> <span>DASHBOARD</span></li>
+                    <li class="logout" id="btnLogout">
+                        <i class="fas fa-times-circle"></i> <span>SAIR</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>AVALIAÇÃO DE HORAS</h1>
+
+            <section class="form-container-azul card-avaliacao">
+                <div class="filtros-avaliacao">
+                    <div class="input-group full-width">
+                        <select class="custom-select" id="filtroTipo">
+                            <option value="">CURSO / TURMA / ALUNO</option>
+                            <option value="curso">Curso</option>
+                            <option value="turma">Turma</option>
+                            <option value="aluno">Aluno</option>
+                        </select>
+                    </div>
+                    <div class="input-search full-width">
+                        <input type="text" id="searchInput" placeholder="DIGITE O NOME DA OPÇÃO ESCOLHIDA">
+                        <i class="fas fa-search" id="searchIcon"></i>
+                    </div>
+                </div>
+
+                <div class="colunas-documentos">
+                    <div class="col-doc">
+                        <h3>ARQUIVOS RECEBIDOS</h3>
+                        <div class="lista-arquivos">
+                            <div class="item-arquivo">
+                                <span>CERTIFICADO_ADS_01</span>
+                                <a href="#" class="btn-abrir">ABRIR</a>
+                                <div class="status-controls">
+                                    <i class="fas fa-check-circle check" title="Aprovar"></i>
+                                    <i class="fas fa-exclamation-circle warn" title="Pendência"></i>
+                                    <i class="fas fa-times-circle error" title="Recusar"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-doc">
+                        <h3>ARQUIVOS COM PENDÊNCIAS</h3>
+                        <div class="lista-arquivos">
+                            <div class="item-arquivo">
+                                <span>CERTIFICADO_MBA_02</span>
+                                <a href="#" class="btn-abrir">ABRIR</a>
+                                <div class="status-controls">
+                                    <i class="fas fa-check-circle check"></i>
+                                    <i class="fas fa-times-circle error"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-doc">
+                        <h3>ARQUIVOS APROVADOS</h3>
+                        <div class="lista-arquivos">
+                            <div class="item-arquivo">
+                                <span>DOC_VALIDADO_03</span>
+                                <a href="#" class="btn-abrir">ABRIR</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-doc">
+                        <h3>ARQUIVOS REPROVADOS</h3>
+                        <div class="lista-arquivos">
+                            <div class="item-arquivo">
+                                <span>DOC_INVALIDO_04</span>
+                                <a href="#" class="btn-abrir">ABRIR</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="action-buttons-footer">
+                <button class="btn-footer blue" id="btnGerarPDF">GERAR PDF</button>
+            </div>
+
+            <div class="circle-orange"></div>
+            <div class="circle-blue"></div>
+        </main>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

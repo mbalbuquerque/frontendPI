@@ -1,0 +1,210 @@
+/* ============================================================
+   1. CONFIGURAÇÕES GERAIS E RESET
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ============================================================
+   2. SIDEBAR (MENU LATERAL)
+   ============================================================ */
+.sidebar {
+    background-color: #e69161;
+    width: 70px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.sidebar.open { width: 240px; }
+
+.menu-icon {
+    font-size: 24px;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+
+.sidebar ul { list-style: none; }
+
+.sidebar li {
+    padding: 15px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.sidebar li i { font-size: 20px; min-width: 25px; text-align: center; }
+.sidebar li span { display: none; opacity: 0; transition: opacity 0.3s; }
+.sidebar.open li span { display: inline; opacity: 1; }
+.sidebar li:hover { background-color: rgba(255, 255, 255, 0.3); }
+.sidebar li.active { background: rgba(255, 255, 255, 0.5); }
+.sidebar li.logout { margin-top: auto; margin-bottom: 20px; }
+
+/* ============================================================
+   3. ÁREA PRINCIPAL E CARDS AZUIS
+   ============================================================ */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow-y: auto;
+}
+
+h1 {
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    font-weight: 400;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* DESTAQUE: Separação dos cards azuis */
+.form-container-azul, .profile-card, .permissions-container {
+    background-color: #c4d4e8;
+    width: 100%;
+    max-width: 900px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Sombras para destaque */
+    margin-bottom: 30px; /* Margem para separação vertical */
+}
+
+/* ============================================================
+   4. CAMPOS DE ENTRADA E BUSCA
+   ============================================================ */
+input, .custom-select, .display-box {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    outline: none;
+    font-size: 14px;
+}
+
+.input-search { position: relative; width: 100%; }
+.input-search i { 
+    position: absolute; 
+    right: 15px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    color: #444;
+    cursor: pointer;
+}
+
+.input-search i:hover { color: #0033a0; }
+
+/* ============================================================
+   5. GRADES E COLUNAS (AVALIAÇÃO E REGRAS)
+   ============================================================ */
+.colunas-documentos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    height: 400px;
+    margin-top: 15px;
+}
+
+.col-doc {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.col-doc h3 { font-size: 9px; text-align: center; margin-bottom: 10px; }
+
+.item-arquivo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10px;
+    padding: 8px;
+    background: #fff;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+.status-controls i { cursor: pointer; margin-left: 4px; font-size: 12px; }
+.check { color: #28a745; }
+.warn { color: #ffc107; }
+.error { color: #dc3545; }
+
+/* ============================================================
+   6. BOTÕES E HOVER
+   ============================================================ */
+.action-buttons-footer {
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+    z-index: 5;
+}
+
+.btn-footer {
+    width: 160px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.btn-footer.blue { background-color: #6a92cc; color: white; }
+.btn-footer.gray { background-color: #9db2c9; color: #000; }
+
+/* EFEITO HOVER SOLICITADO */
+.btn-footer:hover {
+    filter: brightness(0.9);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ============================================================
+   7. DECORAÇÃO (CÍRCULOS)
+   ============================================================ */
+.circle-orange {
+    position: fixed; bottom: -100px; right: -80px;
+    width: 300px; height: 300px;
+    background-color: #e69161; border-radius: 50%; z-index: -2;
+}
+
+.circle-blue {
+    position: fixed; bottom: 40px; right: 40px;
+    width: 150px; height: 150px;
+    background-color: #0033a0; border-radius: 50%; z-index: -1;
+}
+
+@media (max-width: 850px) {
+    .colunas-documentos { grid-template-columns: repeat(2, 1fr); height: auto; }
+}

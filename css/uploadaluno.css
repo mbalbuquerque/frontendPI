@@ -1,0 +1,314 @@
+/* ============================================================
+   1. RESET E CONFIGURAÇÕES GLOBAIS
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Scroll apenas nos containers internos */
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ============================================================
+   2. SIDEBAR (MENU LATERAL) -
+   ============================================================ */
+.sidebar {
+    background-color: #e69161;
+    width: 70px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+.sidebar.open { width: 240px; }
+
+.menu-icon {
+    font-size: 24px;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+
+.sidebar ul { list-style: none; }
+
+.sidebar li {
+    padding: 15px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 8px;
+    margin-bottom: 5px;
+}
+
+.sidebar li i { font-size: 20px; min-width: 25px; text-align: center; }
+.sidebar li span { display: none; opacity: 0; transition: opacity 0.3s; }
+.sidebar.open li span { display: inline; opacity: 1; }
+.sidebar li:hover { background-color: rgba(255, 255, 255, 0.3); }
+.sidebar li.active { background: rgba(255, 255, 255, 0.5); }
+.sidebar li.logout { margin-top: auto; margin-bottom: 20px; }
+
+/* ============================================================
+   3. ÁREA PRINCIPAL E CARDS AZUIS (DESTAQUE) -
+   ============================================================ */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow-y: auto;
+}
+
+h1 {
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    font-weight: 400;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* CARDS: Margem para separação e sombra para profundidade */
+.form-container-azul, .profile-card, .permissions-container, .card-regras {
+    background-color: #c4d4e8;
+    width: 100%;
+    max-width: 900px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+    margin-bottom: 30px; 
+}
+
+/* ============================================================
+   4. INPUTS E BUSCA (LUPA) -
+   ============================================================ */
+label {
+    display: block;
+    font-size: 11px;
+    margin-bottom: 6px;
+    font-weight: 800;
+    color: #333;
+}
+
+input, .custom-select, .display-box {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    outline: none;
+    font-size: 14px;
+}
+
+.input-search { position: relative; width: 100%; }
+.input-search i { 
+    position: absolute; 
+    right: 15px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+    color: #444;
+    cursor: pointer;
+    transition: 0.2s;
+}
+.input-search i:hover { color: #0033a0; transform: translateY(-50%) scale(1.1); }
+
+/* ============================================================
+   5. AVALIAÇÃO DE HORAS (4 COLUNAS) -
+   ============================================================ */
+.colunas-documentos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    height: 400px;
+    margin-top: 15px;
+}
+
+.col-doc {
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 10px;
+    padding: 15px 10px;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.col-doc h3 { font-size: 9px; text-align: center; margin-bottom: 15px; font-weight: bold; }
+
+.item-arquivo, .item-enviado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 10px;
+    padding: 8px;
+    background: #fff;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.status-controls i, .check { font-size: 13px; cursor: pointer; }
+.check { color: #28a745; }
+.warn { color: #ffc107; }
+.error { color: #dc3545; }
+
+/* ============================================================
+   6. UPLOAD DE ARQUIVOS -
+   ============================================================ */
+.drop-zone {
+    width: 100%;
+    max-width: 600px;
+    height: 120px;
+    background-color: #9db2c9;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #0033a0;
+    margin: 0 auto;
+}
+
+.drop-zone:hover { background-color: #8da2b9; transform: scale(1.02); }
+.drop-zone i { font-size: 40px; margin-bottom: 10px; }
+.card-lista-enviados { background-color: #fff !important; min-height: 200px; }
+
+/* ============================================================
+   7. BOTÕES E HOVER -
+   ============================================================ */
+.action-buttons-footer {
+    display: flex;
+    gap: 40px;
+    margin-top: 10px;
+    justify-content: center;
+}
+
+.btn-footer, .btn-save {
+    width: 180px;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.btn-footer.blue, .btn-save { background-color: #6a92cc; color: white; }
+.btn-footer.gray { background-color: #9db2c9; color: #000; }
+
+.btn-footer:hover, .btn-save:hover {
+    filter: brightness(0.9);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* ============================================================
+   8. ELEMENTOS DECORATIVOS E RESPONSIVIDADE -
+   ============================================================ */
+.circle-orange {
+    position: fixed; bottom: -110px; right: -90px;
+    width: 330px; height: 330px;
+    background-color: #e69161; border-radius: 50%; z-index: -2;
+}
+
+.circle-blue {
+    position: fixed; bottom: 30px; right: 50px;
+    width: 170px; height: 170px;
+    background-color: #0033a0; border-radius: 50%; z-index: -1;
+}
+
+@media (max-width: 900px) {
+    .colunas-documentos { grid-template-columns: repeat(2, 1fr); height: auto; }
+}
+
+@media (max-width: 768px) {
+    .sidebar { width: 100% !important; height: 60px; position: fixed; bottom: 0; flex-direction: row; }
+    .sidebar li span, .menu-icon { display: none !important; }
+    .main-content { padding-bottom: 80px; }
+    .action-buttons-footer { flex-direction: column; align-items: center; gap: 15px; }
+}
+
+/* Área de Upload Interativa */
+.upload-area {
+    border: 2px dashed #92a8d1;
+    background: #f8faff;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.upload-area:hover { background: #edf2ff; border-color: #4a90e2; }
+.upload-area i { font-size: 40px; color: #4a90e2; margin-bottom: 10px; }
+
+/* Botão Enviar */
+.btn-enviar-simples {
+    background: #4a90e2;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    margin-top: 15px;
+    width: 100%;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Cards de Certificados */
+.card-arquivo {
+    background: white;
+    margin-bottom: 10px;
+    padding: 15px 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.info { display: flex; flex-direction: column; flex: 1; }
+.nome-doc { font-weight: bold; color: #333; }
+.data-envio { font-size: 12px; color: #888; }
+
+/* Badges de Status */
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: bold;
+    margin: 0 15px;
+    min-width: 80px;
+    text-align: center;
+}
+.enviado { background: #e3f2fd; color: #1976d2; }   /* Azul */
+.aprovado { background: #e8f5e9; color: #2e7d32; }  /* Verde */
+.reprovado { background: #ffebee; color: #c62828; } /* Vermelho */
+
+.btn-abrir {
+    background: none;
+    border: 1px solid #ddd;
+    padding: 5px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 12px;
+}

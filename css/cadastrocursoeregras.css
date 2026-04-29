@@ -1,0 +1,312 @@
+/* ============================================================
+   ESTILOS GLOBAIS E RESET (MANTIDO)
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Arial, sans-serif;
+}
+
+:root {
+    --bg-principal: #f0f4f8;      /* Fundo suave da página */
+    --azul-container: #d9e2ec;    /* Fundo azul claro dos containers */
+    --azul-header: #bcccdc;       /* Cabeçalho da tabela */
+    --borda-azul: #9fb3c8;        /* Cor das linhas da grade */
+    --branco: #ffffff;
+    --azul-botao: #6a92cc;
+}
+
+body {
+    background-color: var(--bg-principal);
+    height: 100vh;
+    overflow: hidden; 
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ============================================================
+   SIDEBAR (MENU LATERAL - MANTIDO)
+   ============================================================ */
+.sidebar {
+    background-color: #e69161;
+    width: 70px;
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 100;
+}
+
+.sidebar.open { width: 240px; }
+
+.menu-icon {
+    font-size: 24px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    width: min-content;
+}
+
+.sidebar ul { list-style: none; }
+
+.sidebar li {
+    padding: 15px 10px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 8px;
+    transition: background 0.3s;
+    margin-bottom: 5px;
+}
+
+.sidebar li i {
+    font-size: 20px;
+    min-width: 25px;
+    text-align: center;
+}
+
+.sidebar li span {
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: none;
+}
+
+.sidebar.open li span {
+    opacity: 1;
+    display: inline;
+}
+
+.sidebar li:hover { background-color: rgba(255, 255, 255, 0.3); }
+.sidebar li.active { background: rgba(255, 255, 255, 0.5); }
+.sidebar li.logout { margin-top: 50px; }
+
+/* ============================================================
+   CONTEÚDO PRINCIPAL E CONTAINERS (UNIFICADO)
+   ============================================================ */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow-y: auto;
+}
+
+h1 {
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    font-weight: 400;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* Container Azul ajustado para as cores novas */
+.profile-card, .form-container-azul {
+    background-color: var(--azul-container);
+    width: 100%;
+    max-width: 900px;
+    padding: 35px;
+    border-radius: 20px; /* Bordas arredondadas da imagem 1 */
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+}
+
+/* ============================================================
+   ESTILO EXCEL E GRADE (NOVO ADICIONADO)
+   ============================================================ */
+.tabela-excel-wrapper {
+    background: var(--branco);
+    border: 1px solid var(--borda-azul);
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 10px;
+}
+
+.excel-grid {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.excel-grid th, .excel-grid td {
+    border: 1px solid var(--borda-azul);
+    padding: 12px 15px;
+    color: #334e68;
+    text-align: left;
+}
+
+.excel-grid th {
+    background-color: var(--azul-header);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+}
+
+/* ============================================================
+   BOTÕES DE AÇÃO QUADRADOS (NOVO ADICIONADO)
+   ============================================================ */
+.actions-cell {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+}
+
+.btn-acao-quadrado {
+    width: 32px;
+    height: 32px;
+    border: none;
+    border-radius: 6px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.1s, opacity 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-acao-quadrado:hover {
+    opacity: 0.9;
+    transform: scale(1.05);
+}
+
+.btn-acao-quadrado.green { background-color: #2fb344; } 
+.btn-acao-quadrado.blue { background-color: #003eb3; }  
+.btn-acao-quadrado.orange { background-color: #f59e0b; } 
+
+/* ============================================================
+   FORMULÁRIOS, INPUTS E BUSCA
+   ============================================================ */
+.input-search {
+    position: relative;
+}
+
+.input-search input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--borda-azul);
+    border-radius: 8px;
+    background: var(--branco);
+    outline: none;
+}
+
+.input-search i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    color: #444;
+}
+
+label {
+    display: block;
+    font-size: 11px;
+    margin-bottom: 6px;
+    font-weight: 800;
+    color: #333;
+}
+
+/* Botões de Rodapé (Mantendo seus estilos anteriores) */
+.action-buttons-footer {
+    margin-top: 40px;
+    display: flex;
+    gap: 25px;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn-footer {
+    padding: 14px 25px;
+    border-radius: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+}
+
+.btn-footer.blue {
+    background-color: var(--azul-botao);
+    color: white;
+    min-width: 150px;
+}
+
+.btn-footer.gray {
+    background-color: #c4d4e8;
+    border: 1px solid #9db2c9;
+    min-width: 200px;
+}
+
+.btn-footer:hover {
+    filter: brightness(90%);
+    transform: translateY(-2px);
+}
+
+/* Estilos fundamentais para o modal funcionar */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none; /* Mantém escondido por padrão */
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 400px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-modal {
+            cursor: pointer;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .modal-body label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .modal-body input, .modal-body select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn-confirmar {
+            width: 100%;
+            margin-top: 20px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }

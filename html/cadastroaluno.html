@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Aluno - UP Digital</title>
+    <link rel="stylesheet" href="../css/cadastrodealuno.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="container">
+        <aside class="sidebar" id="sidebar">
+            <div class="menu-icon" id="menuBtn"><i class="fas fa-bars"></i></div>
+            <nav>
+                <ul>
+                    <li id="btnInicio"><i class="fas fa-home"></i> <span>INÍCIO</span></li>
+                    <li id="btnConta"><i class="fas fa-user"></i> <span>CONTA</span></li>
+                    <li id="btnArquivos"><i class="fas fa-folder"></i> <span>ARQUIVOS</span></li>
+                    <li id="btnRegras"><i class="fas fa-file-contract"></i> <span>REGRAS</span></li>
+                    <li id="btnDashboard"><i class="fas fa-chart-bar"></i> <span>DASHBOARD</span></li>
+                    <li class="logout" id="btnLogout">
+                        <i class="fas fa-times-circle"></i> <span>SAIR</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <h1>CADASTRO DE ALUNO</h1>
+
+            <section class="form-container-azul">
+                <div class="coord-form">
+                    <div class="input-search full-width">
+                        <input type="text" id="searchInput" placeholder="NOME COMPLETO">
+                        <i class="fas fa-search" id="searchIcon" style="cursor: pointer;"></i>
+                    </div>
+                    <div class="input-group full-width">
+                        <input type="email" placeholder="E-MAIL INSTITUCIONAL">
+                    </div>
+                    <div class="input-group full-width">
+                        <input type="text" placeholder="MATRÍCULA">
+                    </div>
+                    <div class="input-group full-width">
+                        <input type="text" placeholder="CURSO">
+                    </div>
+                    <div class="input-group full-width">
+                        <input type="text" placeholder="TURMA">
+                    </div>
+                </div>
+            </section>
+
+            <section class="permissions-container">
+                <div class="checkbox-group-aluno">
+                    <label class="check-item">
+                        <input type="checkbox"> <span>UPLOAD DE ARQUIVOS</span>
+                    </label>
+                    <label class="check-item">
+                        <input type="checkbox"> <span>ALTERAR SENHA</span>
+                    </label>
+                </div>
+            </section>
+
+            <div class="action-buttons-footer">
+                <button class="btn-footer blue">SALVAR</button>
+                <button class="btn-footer gray">EXCLUIR</button>
+            </div>
+
+            <div class="circle-orange"></div>
+            <div class="circle-blue"></div>
+        </main>
+    </div>
+
+    <script src="../js/script.js"></script>
+</body>
+</html>

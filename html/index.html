@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UP Digital - Login</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="manifest" href="../js/manifest.json">
+    <meta name="theme-color" content="#0033a0">
+</head>
+<body>
+    <div class="login-container">
+        
+        <div class="branding-section">
+            <h1 class="main-title">UP Digital</h1>
+            <p class="sub-title">GESTÃO ACADÊMICA DE<br>HORAS COMPLEMENTARES</p>
+            
+            <div class="hero-visual">
+                <div class="circle-frame">
+                    <img src="../imagens/alunos.png" alt="Estudante">
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="login-card">
+                <div class="card-header">
+                    <img src="../imagens/logo2.png" alt="Logo UP Digital">
+                </div>
+
+                
+                
+               <form id="loginForm">
+    <div class="input-group">
+        <select class="pwa-input" id="tipoPerfil" required>
+            <option value="" disabled selected>PERFIL</option>
+            <option value="ADMINISTRADOR">ADMINISTRADOR</option>
+            <option value="COORDENADOR">COORDENADOR</option>
+            <option value="ALUNO">ALUNO</option>
+        </select>
+    </div>
+    </form>
+
+    <div class="input-group">
+        <input type="text" placeholder="MATRÍCULA" required class="pwa-input">
+    </div>
+
+    <div class="input-group">
+        <input type="password" placeholder="SENHA" required class="pwa-input">
+    </div>
+
+    <button type="button" id="btnEntrar" class="btn-pwa-entrar">ENTRAR</button>
+    
+    <a href="#" class="forgot-link">ESQUECI MINHA SENHA</a>
+</form>
+
+        </div>
+
+        <div class="deco-circle-orange"></div>
+        <div class="deco-bar-blue"></div>
+    </div>
+
+    <script src="../js/script.js"></script>
+
+    
+</body>
+</html>

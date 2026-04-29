@@ -1,0 +1,285 @@
+/* ============================================================
+   RESET E CONFIGURAÇÕES GLOBAIS
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f5f5f5;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden; /* Evita barras de rolagem desnecessárias no corpo */
+}
+
+.container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* ============================================================
+   SIDEBAR (MENU LATERAL)
+   ============================================================ */
+.sidebar {
+    background-color: #e69161;
+    width: 70px; /* Largura padrão fechada */
+    padding: 20px 15px;
+    display: flex;
+    flex-direction: column;
+    color: #000;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    white-space: nowrap;
+    z-index: 100;
+    flex-shrink: 0;
+}
+
+/* Classe controlada pelo JavaScript */
+.sidebar.open {
+    width: 240px;
+}
+
+.menu-icon {
+    font-size: 24px;
+    margin-bottom: 40px;
+    cursor: pointer;
+    width: min-content;
+    transition: transform 0.2s;
+}
+
+.menu-icon:hover {
+    transform: scale(1.1);
+}
+
+.sidebar ul {
+    list-style: none;
+}
+
+.sidebar li {
+    padding: 15px 10px;
+    font-size: 13px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    margin-bottom: 5px;
+}
+
+.sidebar li i {
+    font-size: 20px;
+    min-width: 25px;
+    text-align: center;
+}
+
+.sidebar li span {
+    opacity: 0;
+    transition: opacity 0.3s;
+    display: none; 
+}
+
+.sidebar.open li span {
+    opacity: 1;
+    display: inline;
+}
+
+.sidebar li:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+}
+
+.sidebar li.active {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.sidebar li.logout {
+    margin-top: auto; /* Joga o botão sair para o fim */
+    margin-bottom: 20px;
+}
+
+/* ============================================================
+   CONTEÚDO PRINCIPAL (MAIN)
+   ============================================================ */
+.main-content {
+    flex: 1;
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    overflow-y: auto; /* Scroll apenas no conteúdo se necessário */
+}
+
+h1 {
+    margin-bottom: 30px;
+    letter-spacing: 3px;
+    font-weight: 400;
+    color: #333;
+    text-align: center;
+}
+
+/* Containers Azuis (Cards) */
+.profile-card, .form-container-azul, .permissions-container {
+    background-color: #c4d4e8;
+    width: 100%;
+    max-width: 900px;
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+}
+
+/* ============================================================
+   FORMULÁRIOS E GRIDS
+   ============================================================ */
+.profile-form, .atividades-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px 40px;
+}
+
+.coord-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.full-width {
+    grid-column: span 2;
+}
+
+label {
+    display: block;
+    font-size: 11px;
+    margin-bottom: 6px;
+    font-weight: 800;
+    color: #333;
+}
+
+input {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #fff;
+    outline: none;
+    font-size: 14px;
+}
+
+input:focus {
+    box-shadow: 0 0 0 2px #6a92cc;
+}
+
+/* Busca com Ícone */
+.input-search {
+    position: relative;
+    width: 100%;
+}
+
+.input-search i {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.1rem;
+    color: #444;
+}
+
+/* Cabeçalho da Tela de Curso */
+.search-header {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 40px;
+    align-items: flex-end;
+    margin-bottom: 25px;
+}
+
+/* Checkboxes (Autorizações) */
+/* Seção de Autorizações */
+.permissions-container {
+    background-color: #c4d4e8;
+    width: 100%;
+    max-width: 900px;
+    padding: 25px 35px;
+    border-radius: 15px;
+    margin-top: 20px;
+}
+
+.checkbox-group {
+    display: grid;
+    /* 4 colunas iguais - o minmax garante que não achatem */
+    grid-template-columns: repeat(4, minmax(150px, 1fr)); 
+    gap: 20px;
+    align-items: start; /* Alinha o conteúdo ao topo de cada célula */
+}
+
+.check-item {
+    display: flex;
+    align-items: center; /* Alinha o quadrado com o meio da primeira linha de texto */
+    gap: 12px;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    line-height: 1.2;
+    min-height: 40px; /* Garante altura mínima igual para todos */
+}
+
+.check-item input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0; /* Impede que o checkbox diminua se o texto for grande */
+    cursor: pointer;
+    accent-color: #0033a0; /* Cor do "v" ao marcar */
+}
+
+/* Botões de Rodapé */
+.action-buttons-footer {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    gap: 60px; /* Espaço maior entre os botões como no Figma */
+    width: 100%;
+}
+
+.btn-footer {
+    width: 180px; /* Largura fixa para simetria */
+    padding: 12px 0;
+    border-radius: 8px;
+    border: none;
+    font-weight: bold;
+    font-size: 13px;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+}
+
+/* Botão Salvar (Azul Médio) */
+.btn-footer.blue {
+    background-color: #6a92cc;
+    color: white;
+}
+
+.btn-footer.blue:hover {
+    background-color: #527bb8;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(106, 146, 204, 0.3);
+}
+
+/* Botão Excluir (Cinza Azulado) */
+.btn-footer.gray {
+    background-color: #9db2c9;
+    color: #000;
+}
+
+.btn-footer.gray:hover {
+    background-color: #89a1ba;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(157, 178, 201, 0.3);
+}
+

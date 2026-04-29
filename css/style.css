@@ -1,0 +1,214 @@
+/* ============================================================
+   1. CONFIGURAÇÕES GLOBAIS E RESET
+   ============================================================ */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #fdf8f8;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+.login-container {
+    display: flex;
+    min-height: 100vh;
+    width: 100%;
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================================
+   2. SEÇÃO DE BRANDING (ESQUERDA)
+   ============================================================ */
+.branding-section {
+    flex: 1.2;
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    z-index: 5;
+}
+
+.main-title {
+    color: #0033a0;
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.sub-title {
+    color: #e67e22;
+    font-size: 1.4rem;
+    font-weight: bold;
+    line-height: 1.2;
+    margin-bottom: 40px;
+}
+
+.circle-frame {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #fff;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.circle-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ============================================================
+   3. SEÇÃO DO FORMULÁRIO (DIREITA)
+   ============================================================ */
+.form-section {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 10;
+}
+
+.login-card {
+    background-color: #4a86e8;
+    width: 100%;
+    max-width: 380px;
+    padding: 45px 35px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.card-header img {
+    width: 85px;
+    background: white;
+    padding: 12px;
+    border-radius: 15px;
+    margin-bottom: 35px;
+}
+
+/* Inputs e Selects Estilizados */
+.pwa-input {
+    width: 100%;
+    padding: 14px;
+    margin-bottom: 15px;
+    border: none;
+    border-radius: 10px;
+    background-color: #9db2c9;
+    color: #333;
+    font-weight: 600;
+    font-size: 14px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.pwa-input:focus {
+    background-color: #b0c4de;
+    box-shadow: 0 0 0 2px rgba(255,255,255,0.5);
+}
+
+/* Botão Entrar */
+#btnEntrar {
+    background-color: white;
+    color: #0033a0;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%; /* Ajuste conforme seu layout */
+    text-transform: uppercase;
+}
+
+.btnEntrar:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    filter: brightness(1.05);
+}
+
+.forgot-link {
+    display: block;
+    margin-top: 20px;
+    color: white;
+    font-size: 11px;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* ============================================================
+   4. RESPONSIVIDADE PWA (MOBILE) - ONDE CORRIGE O "ESTRANHO"
+   ============================================================ */
+@media (max-width: 900px) {
+    .login-container {
+        flex-direction: column;
+        padding-top: 40px;
+    }
+
+    .branding-section {
+        padding: 20px;
+        align-items: center;
+        text-align: center;
+        flex: none;
+    }
+
+    .main-title { font-size: 2.5rem; }
+    .sub-title { font-size: 1.1rem; margin-bottom: 20px; }
+
+    .circle-frame {
+        width: 180px;
+        height: 180px;
+    }
+
+    .form-section {
+        flex: 1;
+        padding: 40px 20px;
+        width: 100%;
+    }
+
+    .login-card {
+        max-width: 100%; /* Card expande no telemóvel */
+        padding: 35px 20px;
+    }
+
+    /* Aumenta áreas de toque para mobile */
+    .pwa-input, .btn-entrar {
+        padding: 16px;
+        font-size: 16px; 
+    }
+}
+
+/* ============================================================
+   5. DECORAÇÕES DE FUNDO
+   ============================================================ */
+.deco-circle-orange {
+    position: fixed;
+    bottom: -50px;
+    left: -50px;
+    width: 250px;
+    height: 250px;
+    background-color: #e67e22;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+.deco-bar-blue {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100px;
+    height: 100%;
+    background-color: #0033a0;
+    z-index: 1;
+}
+
+@media (max-width: 900px) {
+    .deco-bar-blue { width: 40px; } /* Diminui a barra azul no mobile */
+}
